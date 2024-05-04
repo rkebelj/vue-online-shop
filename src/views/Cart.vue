@@ -34,8 +34,8 @@
   const router = useRouter()
 
   const store = productsStore()
-
   const removeFromCart = (id) => {
+    console.log(store.cart)
     store.removeFromCart(id)
   }
 
