@@ -4,7 +4,7 @@
         class="product"
     >
       <v-img
-          :src="props.productData.thumbnail"
+          :src="img"
           height="200px"
           cover
       />
@@ -34,17 +34,21 @@
   export default defineComponent({
     name: 'ProductItem',
   })
+
+
+
 </script>
 
 <script setup>
-  import { defineProps, defineEmits } from 'vue'
+  import { defineProps, defineEmits, ref } from 'vue'
+  import img from "../assets/product.jpg"
   const props = defineProps({
     productData: {
       type: Object,
       required: true,
     }
   })
-
+  const image = ref(img)
   const emit = defineEmits(['item-clicked'])
 
   const goToProductPage = (productId) => {

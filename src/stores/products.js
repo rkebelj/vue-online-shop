@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 
-const apiUrl = "https://localhost:7164/api/v1/product";
+const apiUrl = "https://janshop.azurewebsites.net/api/v1/Product";
 
 export const productsStore = defineStore('products', {
   state: () => ({
@@ -10,6 +10,7 @@ export const productsStore = defineStore('products', {
 
   actions: {
     async getAllProducts() {
+      console.log("GET")
       try {
         const response = await fetch(apiUrl);
         if (!response.ok) {
@@ -55,6 +56,28 @@ export const productsStore = defineStore('products', {
       .catch(error => {
         console.error('Error deleting product:', error);
       });
-    }
+    },
+    addProduct(newProductData) {
+      try {
+      console.log("POST")
+
+        const response = fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(newProductData)
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to add product. Status: ' + response.status);
+        }
+
+        // Update the list of products after addition
+        this.getAllProducts();
+      } catch (error) {
+        console.error('Error adding product:', error);
+      }
+    },
   }
 });

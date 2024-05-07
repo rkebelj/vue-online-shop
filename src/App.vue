@@ -7,7 +7,14 @@
           color="primary"
           variant="elevated"
 
-      >Items in Cart: {{ store.cart.length }}
+      >Items in Cart {{ store.cart.length }}
+      </v-btn>
+      <v-btn style="margin: 5px;"
+          @click="router.push({ name: 'AddProductView' })"
+          color="primary"
+          variant="elevated"
+
+      >Add item to store 
       </v-btn>
     </v-toolbar>
   </header>
