@@ -8,9 +8,9 @@
   </v-btn>
 
   <div class="product">
-    <div class="product-image">
+    <!-- <div class="product-image">
       <img :src="selectedProduct.thumbnail" alt="">
-    </div>
+    </div> -->
     <div class="product-details">
       <p>Brand: {{ selectedProduct.brand }}</p>
       <p>Description: {{ selectedProduct.description }}</p>
@@ -42,7 +42,11 @@
   const route = useRoute()
 
   const selectedProduct = computed(() => {
-    return store.products.find((item) => item.id === Number(route.params.id))
+    console.log("Store product:", store.products)
+    console.log("Store product:", route.params.id)
+    console.log("Store product:", store.products.find((item) => item.id === route.params.id))
+
+    return store.products.find((item) => item.id === route.params.id)
   })
 
   const addToCart = () => {

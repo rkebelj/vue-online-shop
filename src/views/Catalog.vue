@@ -31,23 +31,32 @@
 </script>
 
 <script setup>
-  import { onMounted, ref } from "vue";
+  import { onBeforeUpdate , onMounted , ref } from "vue";
   import { productsStore } from "@/stores/products";
   import { useRouter } from "vue-router";
 
   const store = productsStore()
   const router = useRouter()
-
+  const products = ref([]);
   const search = ref('')
 
   const goToProductPage = (id) => {
+    console.log("Product ID:", id);
     router.push({ name: 'ProductView', params: { id } })
   }
+  const loadData = async () => {
+    await store.getAllProducts();
+    products.value = store.products;
+  }
 
-
-  onMounted(async () => {
-    await store.fetchProductsFromDB()
-  })
+  onMounted(() => {
+    loadData()
+    console.log("Products:", products.value); // Log before products have been fetched
+  });
+  onBeforeUpdate  (async () => {
+    loadData()
+    console.log("Products:", products.value); // Log after products have been fetched
+});
 </script>
 
 <style scoped>
