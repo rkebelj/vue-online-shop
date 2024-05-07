@@ -1,7 +1,7 @@
 <template>
   <header>
 
-    <v-toolbar title="Application">
+    <v-toolbar title="Jan Online Shop">
       <v-btn
           @click="router.push({ name: 'CartView' })"
           color="primary"
